@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 import { ScrollView } from 'react-native-gesture-handler';
 
-export const Container = styled.View`
+export const Container = styled(ScrollView)`
   flex: 1;
   background-color: white;
 `;
@@ -44,5 +44,3 @@ export const CoinPriceChange = styled.Text<{ isPositive: boolean }>`
   font-size: 18px;
   color: ${({ isPositive }) => (isPositive ? 'green' : 'red')};
 `;
-
-export const DetailsContainer = styled(ScrollView)``;

@@ -34,16 +34,22 @@ const Home: FC = () => {
 
   const renderCryptoItem = useCallback(
     ({
-      item: { name, current_price, high_24h, id, image, low_24h, symbol },
+      item: {
+        name,
+        current_price,
+        id,
+        image,
+        symbol,
+        price_change_percentage_24h,
+      },
     }: ListRenderItemInfo<Coin>) => (
       <CoinItem
         id={id}
         name={name}
         currentPrice={current_price}
         symbol={symbol}
-        highPrice24h={high_24h}
-        lowPrice24h={low_24h}
         image={image}
+        changePercentage={price_change_percentage_24h}
         onPress={handlePressCryptoItem}
       />
     ),
@@ -69,7 +75,7 @@ const Home: FC = () => {
   const { bottom, top } = useSafeAreaInsets();
 
   return (
-    <Container safeTop={top} safeBottom={bottom}>
+    <Container style={{ paddingTop: top, paddingBottom: bottom }}>
       <SearchContainer>
         <TextInput placeholder="Search" onChangeText={handleChangeSearch} />
       </SearchContainer>

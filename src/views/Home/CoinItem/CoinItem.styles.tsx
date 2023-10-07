@@ -1,6 +1,11 @@
 import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TextProps } from 'react-native/types';
+
+interface CoinPriceChangeProps extends TextProps {
+  readonly isPositive: boolean;
+}
 
 export const Container = styled(TouchableOpacity)`
   flex-direction: row;
@@ -13,33 +18,29 @@ export const ImageContainer = styled.View`
 `;
 
 export const NameContainer = styled.View`
-  width: 100px;
+  flex: 1;
+  width: 100%;
   justify-content: center;
   padding-left: 20px;
   gap: 4px;
 `;
 
-export const PriceContainer = styled.View`
-  flex: 1;
-  width: 100px;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 4px;
-`;
-
-export const SymbolContainer = styled.View`
-  flex-direction: row;
-`;
-
-export const MaxContainer = styled.View`
+export const CoinItemRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
 
-export const PriceText = styled.Text``;
+export const SymbolContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
-export const MaxText = styled.Text`
-  font-weight: bold;
+export const PriceText = styled.Text`
+  font-size: 18px;
+`;
+
+export const SymbolText = styled.Text`
+  font-size: 14px;
 `;
 
 export const NameText = styled.Text`
@@ -49,4 +50,8 @@ export const NameText = styled.Text`
 
 export const CryptoImage = styled(FastImage)`
   flex: 1;
+`;
+
+export const CoinPriceChange = styled.Text<CoinPriceChangeProps>`
+  font-size: 14px;
 `;

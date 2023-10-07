@@ -6,13 +6,13 @@ import {
   Container,
   ImageContainer,
   NameContainer,
-  PriceContainer,
   SymbolContainer,
   PriceText,
   NameText,
   CryptoImage,
-  MaxText,
-  MaxContainer,
+  CoinItemRow,
+  CoinPriceChange,
+  SymbolText,
 } from './CoinItem.styles';
 
 const CoinItem: FC<CryptoItemProps> = ({
@@ -20,9 +20,8 @@ const CoinItem: FC<CryptoItemProps> = ({
   name,
   currentPrice,
   symbol,
-  highPrice24h,
-  lowPrice24h,
   image,
+  changePercentage,
   onPress,
 }) => {
   const handlePress = useCallback(() => {
@@ -36,23 +35,25 @@ const CoinItem: FC<CryptoItemProps> = ({
       <ImageContainer>
         <CryptoImage
           source={{ uri: image }}
-          resizeMode={FastImage.resizeMode.cover}
+          resizeMode={FastImage.resizeMode.contain}
         />
       </ImageContainer>
       <NameContainer>
-        <NameText>{name}</NameText>
+        <CoinItemRow>
+          <NameText>{name}</NameText>
+          <PriceText>${currentPrice.toLocaleString('en-EN')}</PriceText>
+        </CoinItemRow>
         <SymbolContainer>
-          <PriceText>{symbol.toUpperCase()}</PriceText>
-          <PriceText> - ${currentPrice}</PriceText>
+          <SymbolText>{symbol.toUpperCase()}</SymbolText>
+          <CoinPriceChange
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{
+              color: Math.sign(changePercentage) === 1 ? 'green' : 'red',
+            }}>
+            {`${Math.abs(changePercentage).toFixed(2)}%`}
+          </CoinPriceChange>
         </SymbolContainer>
       </NameContainer>
-      <PriceContainer>
-        <MaxText>Max - Min (24h)</MaxText>
-        <MaxContainer>
-          <PriceText>${highPrice24h}</PriceText>
-          <PriceText> - ${lowPrice24h}</PriceText>
-        </MaxContainer>
-      </PriceContainer>
     </Container>
   );
 };

@@ -3,13 +3,9 @@ import { FlatList } from 'react-native-gesture-handler';
 
 import { Coin } from '../../services/types';
 
-import { HomeContainerProps } from './Home.types';
-
-export const Container = styled.View<HomeContainerProps>`
+export const Container = styled.View`
   flex: 1;
   background-color: white;
-  padding-top: ${({ safeTop }) => safeTop}px;
-  padding-bottom: ${({ safeBottom }) => safeBottom}px;
 `;
 
 export const SearchContainer = styled.View`
