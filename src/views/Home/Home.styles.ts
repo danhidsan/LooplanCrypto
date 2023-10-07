@@ -7,6 +7,11 @@ export const Container = styled.View`
   flex: 1;
   background-color: white;
 `;
+
+export const SearchContainer = styled.View`
+  padding: 20px;
+`;
+
 export const CryptoList = styled(FlatList as FlatList<Crypto>)`
   padding-top: 20px;
 `;

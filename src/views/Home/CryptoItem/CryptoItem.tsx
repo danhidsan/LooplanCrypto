@@ -26,7 +26,9 @@ const CryptoItem: FC<CryptoItemProps> = ({
   onPress,
 }) => {
   const handlePress = useCallback(() => {
-    onPress(id);
+    if (onPress) {
+      onPress(id);
+    }
   }, [id, onPress]);
 
   return (

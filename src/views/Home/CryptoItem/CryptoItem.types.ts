@@ -6,5 +6,5 @@ export type CryptoItemProps = {
   currentPrice: number;
   highPrice24h: number;
   lowPrice24h: number;
-  onPress: (id: string) => void;
+  onPress?: (id: string) => void;
 };
