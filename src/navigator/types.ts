@@ -1,9 +1,11 @@
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 
+import { Coin } from '../services/types';
+
 export type ParamList = {
   Home: {};
   Details: {
-    coinId: string;
+    coin?: Coin;
   };
 };
 

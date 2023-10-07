@@ -2,10 +2,12 @@ import React, { FC, useCallback, useState, useMemo } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { ListRenderItemInfo } from 'react-native/types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 import { Coin } from '../../services/types';
 import TextInput from '../../components/TextInput';
 import { useCoins } from '../../hooks/coins';
+import { ScreenProps } from '../../navigator/types';
 
 import {
   Container,
@@ -16,12 +18,19 @@ import {
 import CoinItem from './CoinItem';
 
 const Home: FC = () => {
+  const navigation = useNavigation<ScreenProps<'Home'>['navigation']>();
   const [search, setSearch] = useState<string>();
-  const handlePressCryptoItem = useCallback((cryptoId: string) => {
-    console.log(cryptoId);
-  }, []);
 
   const { coins, isLoading, isFetching } = useCoins();
+
+  const handlePressCryptoItem = useCallback(
+    (coinId: string) => {
+      navigation.navigate('Details', {
+        coin: coins.find(({ id }) => id === coinId),
+      });
+    },
+    [navigation, coins],
+  );
 
   const renderCryptoItem = useCallback(
     ({

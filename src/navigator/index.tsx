@@ -11,9 +11,18 @@ const Navigator: FC = () => {
       <MainStack.Screen
         name="Home"
         component={Home}
-        options={{ title: 'Overview', headerShown: false }}
+        options={{ headerShown: false }}
       />
-      <MainStack.Screen name="Details" component={Details} />
+      <MainStack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          headerBackTitleVisible: false,
+          headerTintColor: 'black',
+          headerShadowVisible: false,
+          headerTitle: '',
+        }}
+      />
     </MainStack.Navigator>
   );
 };

@@ -37,6 +37,7 @@ export const MaxContainer = styled.View`
 `;
 
 export const PriceText = styled.Text``;
+
 export const MaxText = styled.Text`
   font-weight: bold;
 `;
