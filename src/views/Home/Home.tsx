@@ -1,9 +1,11 @@
 import React, { FC, useCallback, useState, useMemo } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { ListRenderItemInfo } from 'react-native/types';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { cryptosMock } from '../../data/mock';
-import { Crypto } from '../../data/types';
+import { Coin } from '../../services/types';
 import TextInput from '../../components/TextInput';
+import { useCoins } from '../../hooks/coins';
 
 import {
   Container,
@@ -11,18 +13,21 @@ import {
   CryptoListSeparator,
   SearchContainer,
 } from './Home.styles';
-import CryptoItem from './CryptoItem';
+import CoinItem from './CoinItem';
 
 const Home: FC = () => {
   const [search, setSearch] = useState<string>();
   const handlePressCryptoItem = useCallback((cryptoId: string) => {
     console.log(cryptoId);
   }, []);
+
+  const { coins, isLoading, isFetching } = useCoins();
+
   const renderCryptoItem = useCallback(
     ({
       item: { name, current_price, high_24h, id, image, low_24h, symbol },
-    }: ListRenderItemInfo<Crypto>) => (
-      <CryptoItem
+    }: ListRenderItemInfo<Coin>) => (
+      <CoinItem
         id={id}
         name={name}
         currentPrice={current_price}
@@ -40,28 +45,34 @@ const Home: FC = () => {
     setSearch(text);
   };
 
-  const filteredCryptos = useMemo(() => {
+  const filteredCoins = useMemo(() => {
     const searchText = search?.toLocaleLowerCase();
     return (
       searchText &&
-      cryptosMock.filter(({ name, symbol }) => {
+      coins.filter(({ name, symbol }) => {
         const matchWithName = name.toLocaleLowerCase().includes(searchText);
         const matchWithSymbol = symbol.toLocaleLowerCase().includes(searchText);
         return matchWithName || matchWithSymbol;
       })
     );
-  }, [search]);
+  }, [search, coins]);
+
+  const { bottom, top } = useSafeAreaInsets();
 
   return (
-    <Container>
+    <Container safeTop={top} safeBottom={bottom}>
       <SearchContainer>
         <TextInput placeholder="Search" onChangeText={handleChangeSearch} />
       </SearchContainer>
-      <CryptoList
-        data={filteredCryptos || cryptosMock}
-        renderItem={renderCryptoItem}
-        ItemSeparatorComponent={CryptoListSeparator}
-      />
+      {isLoading || isFetching ? (
+        <ActivityIndicator />
+      ) : (
+        <CryptoList
+          data={filteredCoins || coins}
+          renderItem={renderCryptoItem}
+          ItemSeparatorComponent={CryptoListSeparator}
+        />
+      )}
     </Container>
   );
 };

@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const Container = styled(TouchableOpacity)`
   flex-direction: row;
-  height: 50px;
+  min-height: 50px;
   padding: 0 20px;
 `;
 

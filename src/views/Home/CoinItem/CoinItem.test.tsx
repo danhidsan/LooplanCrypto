@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import CryptoItem from './CryptoItem';
+import CoinItem from './CoinItem';
 
-describe('CryptoItem tests', () => {
+describe('CoinItem tests', () => {
   const tree = renderer.create(
-    <CryptoItem
+    <CoinItem
       id="tether"
       symbol="usdt"
       currentPrice={0.999496}
@@ -16,7 +16,7 @@ describe('CryptoItem tests', () => {
     />,
   );
 
-  it('CryptoItem renders correctly', () => {
+  it('CoinItem renders correctly', () => {
     expect(tree.toJSON()).toBeTruthy();
   });
 });

@@ -1,6 +1,6 @@
-import { Crypto } from './types';
+import { Coin } from './types';
 
-export const cryptosMock: Crypto[] = [
+export const cryptosMock: Coin[] = [
   {
     id: 'bitcoin',
     symbol: 'btc',

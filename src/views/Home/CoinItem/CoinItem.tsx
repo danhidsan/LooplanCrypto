@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import FastImage from 'react-native-fast-image';
 
-import { CryptoItemProps } from './CryptoItem.types';
+import { CryptoItemProps } from './CoinItem.types';
 import {
   Container,
   ImageContainer,
@@ -13,9 +13,9 @@ import {
   CryptoImage,
   MaxText,
   MaxContainer,
-} from './CryptoItem.styles';
+} from './CoinItem.styles';
 
-const CryptoItem: FC<CryptoItemProps> = ({
+const CoinItem: FC<CryptoItemProps> = ({
   id,
   name,
   currentPrice,
@@ -57,4 +57,4 @@ const CryptoItem: FC<CryptoItemProps> = ({
   );
 };
 
-export default CryptoItem;
+export default CoinItem;
